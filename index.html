@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kinora — Press play on anything</title>
+<meta name="description" content="Kinora is a fast, native media player for Windows. Videos, music and photos open instantly in a calm interface that borrows its colour from what you’re watching.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbfbfa;--surface:#fff;--s2:#f2f2ef;--ink:#0f0f10;--ink2:#6b6b72;--line:#e6e6e2;--btn:#0f0f10;--btnink:#fff;--shadow:0 40px 90px -30px rgba(20,20,40,.28);--ease:cubic-bezier(.22,.8,.2,1);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#09090b;--surface:#141417;--s2:#1b1b1f;--ink:#f5f5f6;--ink2:#9a9aa3;--line:#26262b;--btn:#f5f5f6;--btnink:#0a0a0b;--shadow:0 40px 90px -30px rgba(0,0,0,.8)}}
+:root[data-theme=dark]{--bg:#09090b;--surface:#141417;--s2:#1b1b1f;--ink:#f5f5f6;--ink2:#9a9aa3;--line:#26262b;--btn:#f5f5f6;--btnink:#0a0a0b;--shadow:0 40px 90px -30px rgba(0,0,0,.8)}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:calc(80px + env(safe-area-inset-top,0px))}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:30}
+a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:10px}
+.w{max-width:1120px;margin:0 auto;padding:0 24px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;gap:20px;height:66px}.brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:18px;letter-spacing:-.02em;transition:opacity .25s}.brand:hover{opacity:.7}.brand svg{width:28px;height:28px}
+.links{display:flex;gap:2px;margin-left:14px}.links a{padding:8px 14px;border-radius:99px;color:var(--ink2);font-size:14.5px;transition:background .3s var(--ease),color .3s,transform .2s}.links a:hover{background:var(--s2);color:var(--ink)}.links a:active{transform:scale(.95)}.sp{flex:1}
+/* buttons */
+.btn{--b:var(--btn);--t:var(--btnink);position:relative;overflow:hidden;isolation:isolate;display:inline-flex;align-items:center;gap:14px;height:48px;padding:0 8px 0 24px;border-radius:99px;font-weight:500;font-size:15px;background:var(--b);color:var(--t);white-space:nowrap;transition:background .35s var(--ease),transform .35s var(--ease),box-shadow .35s var(--ease)}
+.btn.n{padding:0 22px}.btn.sm{height:40px;font-size:14px;padding:0 18px}
+.btn::after{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(110px circle at var(--x,50%) var(--y,50%),color-mix(in srgb,var(--t) 26%,transparent),transparent 70%);opacity:0;transition:opacity .35s}
+.btn:hover{background:color-mix(in srgb,var(--b),var(--t) 12%);box-shadow:0 0 0 5px color-mix(in srgb,var(--b) 13%,transparent)}.btn:hover::after{opacity:1}
+.btn:active{transform:scale(.965);box-shadow:0 0 0 2px color-mix(in srgb,var(--b) 18%,transparent);transition-duration:.12s}
+.btn .ai{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:color-mix(in srgb,var(--t) 16%,transparent);transition:transform .5s var(--ease),background .35s,color .35s}.btn .ai svg{width:14px;height:14px;transition:transform .5s var(--ease)}
+.btn:hover .ai{background:var(--t);color:var(--b);transform:translateX(2px)}.btn:hover .ai svg{transform:rotate(-45deg)}
+.btn.g{--b:var(--s2);--t:var(--ink)}.btn.g:hover{background:color-mix(in srgb,var(--s2),var(--ink) 9%);box-shadow:none}
+.lk{background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size .45s var(--ease)}.lk:hover{background-size:100% 1px}.lk span{display:inline-block;transition:transform .4s var(--ease)}.lk:hover span{transform:translate(2px,-2px)}
+.ic{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;color:var(--ink2);transition:background .3s,color .3s,transform .6s var(--ease)}.ic:hover{background:var(--s2);color:var(--ink);transform:rotate(30deg)}.ic:active{transform:scale(.88)}
+/* hero */
+.hero{text-align:center;padding:92px 0 0}
+.eb{display:inline-flex;align-items:center;gap:12px;color:var(--ink2);font-size:13.5px;margin:0}.eb::before,.eb::after{content:"";width:28px;height:1px;background:var(--line)}
+h1{font-size:clamp(42px,8vw,88px);line-height:1;letter-spacing:-.05em;font-weight:600;margin:24px auto 0;max-width:900px}h1 span{color:var(--ink2)}
+.lead{max-width:620px;margin:28px auto 0;color:var(--ink2);font-size:clamp(16px,2vw,19px)}
+.cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:38px}.meta{margin-top:20px;font-size:13px;color:var(--ink2)}
+.win{--acc:#0f0f10;margin:68px auto 0;max-width:980px;border-radius:18px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow);overflow:hidden;text-align:left}
+:root[data-theme=dark] .win,.dk .win{--acc:#f5f5f6}
+.wtop{display:flex;align-items:center;gap:12px;padding:12px 18px;border-bottom:1px solid var(--line);font-size:13px;font-weight:500}.wtop svg{width:20px;height:20px}.wtop .s{margin-left:auto;width:170px;height:26px;border-radius:99px;background:var(--s2)}.wtop .o{width:74px;height:26px;border-radius:99px;background:var(--acc);transition:background .5s}
+.wbody{display:grid;grid-template-columns:54px 1fr}.side{border-right:1px solid var(--line);padding:14px 0;display:flex;flex-direction:column;align-items:center;gap:10px}.side b{width:30px;height:30px;border-radius:9px;background:var(--s2)}.side b:first-child{background:var(--acc);opacity:.9;transition:background .5s}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:18px}.card .t{aspect-ratio:16/10;border-radius:10px;background:linear-gradient(135deg,var(--a),var(--b));transition:transform .6s var(--ease)}.card:hover .t{transform:scale(1.04)}.card{overflow:hidden}.card p{margin:8px 0 0;height:8px;width:75%;border-radius:4px;background:var(--line)}.card p+p{width:45%;margin-top:6px;opacity:.6}
+.bar{display:flex;align-items:center;gap:16px;padding:14px 20px;border-top:1px solid var(--line)}.bar .pl{width:34px;height:34px;border-radius:50%;background:var(--acc);flex:none;transition:background .5s}.bar .tr2{flex:1;height:4px;border-radius:2px;background:var(--line);position:relative}.bar .tr2::before{content:"";position:absolute;inset:0 62% 0 0;border-radius:2px;background:var(--acc);transition:background .5s}.bar .tr2::after{content:"";position:absolute;left:38%;top:-4px;width:12px;height:12px;border-radius:50%;background:var(--acc);transition:background .5s}
+.sw{display:flex;gap:10px;justify-content:center;align-items:center;margin-top:22px;font-size:13px;color:var(--ink2)}.sw button{width:20px;height:20px;border-radius:50%;background:var(--c);box-shadow:0 0 0 2px var(--bg),0 0 0 3px var(--line);transition:transform .4s var(--ease),box-shadow .3s}.sw button:hover{transform:scale(1.35)}.sw button:active{transform:scale(.9)}.sw button.on{box-shadow:0 0 0 2px var(--bg),0 0 0 4px var(--ink)}
+.st{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:92px}.st div{padding:30px 24px;border-left:1px solid var(--line)}.st div:first-child{border:0;padding-left:0}.st b{display:block;font-size:clamp(26px,3.6vw,38px);letter-spacing:-.04em;font-weight:500;line-height:1.1}.st span{color:var(--ink2);font-size:13.5px}
+.mf{font-size:clamp(28px,4.8vw,56px);line-height:1.12;letter-spacing:-.04em;font-weight:600;margin:120px 0 0;max-width:960px}.mf span{color:var(--ink2)}
+section{padding:120px 0 0}.sh{display:grid;grid-template-columns:200px 1fr;gap:24px;margin-bottom:48px}.lb{font-size:13.5px;color:var(--ink2);padding-top:12px;display:flex;gap:12px}.lb b{font-weight:500;color:var(--ink)}
+h2{margin:0;font-size:clamp(30px,4.6vw,48px);letter-spacing:-.04em;line-height:1.06;font-weight:600;max-width:760px}h2 span{color:var(--ink2)}
+/* tour */
+.tour{display:grid;grid-template-columns:1fr 1.05fr;gap:64px;align-items:start}.tl{border-top:1px solid var(--line)}
+.tr{display:block;width:100%;text-align:left;border-bottom:1px solid var(--line);padding:24px 0;position:relative;transition:transform .2s}.tr:active{transform:scale(.99)}
+.tr h3{display:flex;gap:18px;align-items:baseline;margin:0;font-size:21px;font-weight:500;letter-spacing:-.025em;color:var(--ink2);transition:color .3s,transform .5s var(--ease)}.tr h3 small{font-size:12.5px;font-weight:400;font-variant-numeric:tabular-nums;width:14px}
+.tr:hover h3{color:var(--ink);transform:translateX(6px)}.tr.on h3{color:var(--ink);transform:none}
+.dd{display:grid;grid-template-rows:0fr;transition:grid-template-rows .6s var(--ease)}.dd>div{overflow:hidden}.tr.on .dd{grid-template-rows:1fr}
+.tr p{margin:12px 0 4px 32px;color:var(--ink2);max-width:480px;font-size:15.5px;opacity:0;transform:translateY(-8px);transition:opacity .4s,transform .6s var(--ease)}.tr.on p{opacity:1;transform:none;transition-delay:.12s}
+.tr::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:var(--ink);transform:scaleX(0);transform-origin:left}.tr.on::after{animation:pg 7s linear forwards}.tour:hover .tr.on::after{animation-play-state:paused}@keyframes pg{to{transform:scaleX(1)}}
+.tv{position:sticky;top:110px;aspect-ratio:1/1;border-radius:22px;background:var(--s2);overflow:hidden;border:1px solid var(--line)}
+.vz{position:absolute;inset:0;display:grid;place-items:center;padding:9%;opacity:0;transform:scale(.96);transition:opacity .6s var(--ease),transform .9s var(--ease)}.vz.on{opacity:1;transform:none}
+@keyframes hue{to{filter:hue-rotate(360deg)}}@keyframes eq{from{transform:scaleY(.1)}to{transform:scaleY(1)}}@keyframes pop{to{opacity:1;transform:none}}
+.v1{width:100%}.f1{aspect-ratio:16/10;border-radius:16px;background:conic-gradient(from 210deg at 35% 45%,#ff9a56,#ff4f7b,#8b5cf6,#3b82f6,#ff9a56);animation:hue 9s linear infinite}.b1{margin-top:18px;display:flex;gap:14px;align-items:center}.b1 i{display:block;animation:hue 9s linear infinite}.b1 i:first-child{width:34px;height:34px;border-radius:50%;background:#ff4f7b}.b1 i:last-child{flex:1;height:5px;border-radius:3px;background:linear-gradient(90deg,#ff4f7b 42%,var(--line) 42%)}
+.eq{display:flex;gap:6px;align-items:flex-end;height:62%;width:100%}.eq b{flex:1;border-radius:99px;background:var(--ink);height:100%;transform-origin:bottom;animation:eq var(--d) ease-in-out infinite alternate;animation-delay:var(--l)}
+.tg3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:100%}.tg3 i{aspect-ratio:4/3;border-radius:12px;background:linear-gradient(135deg,var(--a),var(--b));opacity:0;transform:translateY(16px)}.vz.on .tg3 i{animation:pop .7s var(--ease) forwards;animation-delay:calc(var(--n)*70ms)}
+.v4{width:100%;aspect-ratio:1;position:relative}.tb{position:absolute;left:4%;right:4%;bottom:2%;height:46px;border-radius:14px;background:var(--surface);display:flex;gap:10px;align-items:center;padding:0 16px;border:1px solid var(--line)}.tb i{width:22px;height:22px;border-radius:7px;background:var(--line)}.tb i.k{background:#101016}
+.w4{position:absolute;left:8%;right:8%;top:6%;bottom:18%;border-radius:14px;background:var(--surface);box-shadow:var(--shadow);border:1px solid var(--line);transform-origin:50% 100%;animation:w4 5s var(--ease) infinite;padding:16px;display:grid;grid-template-columns:1fr 1fr;gap:10px;align-content:start}.w4 i{aspect-ratio:16/10;border-radius:8px;background:var(--s2)}
+@keyframes w4{0%,8%{transform:translateY(60px) scale(.5);opacity:0}22%,78%{transform:none;opacity:1}92%,100%{transform:translateY(60px) scale(.5);opacity:0}}
+.sl{width:100%;display:grid;gap:44px}.sl label{display:flex;justify-content:space-between;font-size:14px;font-weight:500;margin-bottom:14px}.sl label em{font-style:normal;color:var(--ink2);font-variant-numeric:tabular-nums}.sl div{height:6px;border-radius:3px;background:var(--line);position:relative}.sl div::before,.sl div::after{content:"";position:absolute;top:0;animation:mv 4s var(--ease) infinite alternate;animation-delay:var(--l)}.sl div::before{left:0;height:6px;border-radius:3px;background:var(--ink)}.sl div::after{width:18px;height:18px;border-radius:50%;background:var(--ink);top:-6px;margin-left:-9px}
+@keyframes mv{from{left:18%;width:18%}to{left:78%;width:78%}}.sl div::after{animation-name:mvt}@keyframes mvt{from{left:18%}to{left:78%}}.sl div::before{left:0!important;animation-name:mvw}@keyframes mvw{from{width:18%}to{width:78%}}
+.pv{display:grid;gap:12px;width:100%}.pv span{display:flex;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 20px;font-weight:500;opacity:0;transform:translateX(-16px)}.pv span::before{content:"✓";display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--ink);color:var(--bg);font-size:13px}.vz.on .pv span{animation:pop .6s var(--ease) forwards;animation-delay:calc(var(--n)*110ms)}
+.fm{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}.fm div{padding:28px 28px 10px 0;transition:background .4s}.fm div+div{padding-left:28px;border-left:1px solid var(--line)}.fm h4{margin:0 0 12px;font-size:13px;font-weight:500;color:var(--ink2)}.fm p{margin:0;font-size:16.5px;line-height:1.95}.fm b{font-weight:400;border-radius:6px;padding:1px 5px;margin:0 -5px;transition:background .25s,color .25s}.fm b:hover{background:var(--ink);color:var(--bg)}
+.dl{display:grid;grid-template-columns:1.25fr 1fr;gap:16px}.d{position:relative;overflow:hidden;isolation:isolate;padding:36px;border-radius:18px;background:var(--surface);border:1px solid var(--line);display:flex;flex-direction:column;transition:transform .6s var(--ease),border-color .3s,box-shadow .6s var(--ease)}
+.d::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(380px circle at var(--x,50%) var(--y,0),color-mix(in srgb,var(--ink) 8%,transparent),transparent 60%);opacity:0;transition:opacity .4s}.d:hover::before{opacity:1}.d:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.d.main{background:var(--btn);color:var(--btnink);border:0}.d.main::before{background:radial-gradient(380px circle at var(--x,50%) var(--y,0),color-mix(in srgb,var(--btnink) 14%,transparent),transparent 60%)}
+.d h3{margin:0;font-size:26px;letter-spacing:-.03em;font-weight:500}.d p{opacity:.72;margin:10px 0 24px;font-size:15px}.d ul{margin:0 0 30px;padding:0;list-style:none;font-size:14.5px}.d li{padding:11px 0;border-top:1px solid color-mix(in srgb,currentColor 14%,transparent);opacity:.88}.d .btn{margin-top:auto;align-self:flex-start}.d.main .btn{--b:var(--btnink);--t:var(--btn)}
+.req{margin-top:20px;font-size:13.5px;color:var(--ink2)}
+.faq{border-top:1px solid var(--line)}.q{border-bottom:1px solid var(--line)}
+.q button{width:100%;display:flex;justify-content:space-between;align-items:center;gap:24px;padding:26px 0;text-align:left;font-size:18.5px;font-weight:500;letter-spacing:-.015em;transition:padding .5s var(--ease),transform .15s}.q button:hover{padding-left:12px}.q button:active{transform:scale(.995)}
+.pm{position:relative;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);flex:none;transition:background .35s,color .35s,border-color .35s,transform .7s var(--ease)}
+.pm::before,.pm::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:1.6px;background:currentColor;border-radius:1px;transform:translate(-50%,-50%);transition:transform .7s var(--ease)}.pm::after{transform:translate(-50%,-50%) rotate(90deg)}
+.q button:hover .pm{border-color:var(--ink)}.q.open .pm{transform:rotate(180deg);background:var(--ink);color:var(--bg);border-color:var(--ink)}.q.open .pm::after{transform:translate(-50%,-50%) rotate(0)}
+.a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .65s var(--ease)}.a>div{overflow:hidden;visibility:hidden;transition:visibility 0s .65s}
+.a p{margin:0;padding:0 64px 30px 0;max-width:740px;color:var(--ink2);font-size:16.5px;opacity:0;transform:translateY(-12px);transition:opacity .35s,transform .7s var(--ease)}
+.q.open .a{grid-template-rows:1fr}.q.open .a>div{visibility:visible;transition-delay:0s}.q.open .a p{opacity:1;transform:none;transition-delay:.12s}
+footer{margin-top:140px;border-top:1px solid var(--line);padding:40px 0 56px;color:var(--ink2);font-size:13.5px}.fo{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.fo nav{display:flex;gap:22px}.fo a:hover{color:var(--ink)}
+.js .rv{opacity:0;transform:translateY(24px);transition:opacity .9s var(--ease),transform .9s var(--ease)}.js .rv.in{opacity:1;transform:none}
+#toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:var(--ink);color:var(--bg);padding:12px 20px;border-radius:99px;font-size:14px;opacity:0;pointer-events:none;transition:.4s var(--ease);z-index:40;max-width:92vw;text-align:center}#toast.on{opacity:1;transform:translate(-50%,0)}
+@media(max-width:900px){.tour{grid-template-columns:1fr}.tv{display:none}.tr .dd{grid-template-rows:1fr}.tr p{opacity:1;transform:none}.tr h3{color:var(--ink)}.tr::after{display:none}.sh{grid-template-columns:1fr;gap:10px}.dl{grid-template-columns:1fr}.links{display:none}.grid{grid-template-columns:repeat(2,1fr)}.wtop .s{display:none}.st{grid-template-columns:1fr 1fr}.st div:nth-child(3){border-left:0;padding-left:0}.fm{grid-template-columns:1fr}.fm div,.fm div+div{padding:24px 0 8px;border-left:0}.fm div+div{border-top:1px solid var(--line)}}
+@media(max-width:560px){.hero{padding-top:56px}.wbody{grid-template-columns:1fr}.side{display:none}section{padding-top:88px}.mf{margin-top:90px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms!important;animation:none!important;scroll-behavior:auto!important}.tg3 i,.pv span{opacity:1!important;transform:none!important}}
+</style></head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffc454"/><stop offset=".45" stop-color="#ff6b6b"/><stop offset=".8" stop-color="#a05cf6"/><stop offset="1" stop-color="#3b82f6"/></linearGradient>
+<symbol id="logo" viewBox="0 0 64 64"><rect width="64" height="64" rx="15" fill="#101016"/><circle cx="32" cy="32" r="19" fill="none" stroke="url(#g)" stroke-width="5" stroke-linecap="round" stroke-dasharray="93 120" transform="rotate(-90 32 32)"/><circle cx="13.3" cy="28.7" r="4" fill="#fff"/><path d="M28 24v16l13-8z" fill="#fff" stroke="#fff" stroke-width="3" stroke-linejoin="round"/></symbol>
+<symbol id="arrow" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol></defs></svg>
+<header><div class="w nav"><a class="brand" href="#top"><svg><use href="#logo"/></svg>Kinora</a>
+<nav class="links"><a href="#features">Features</a><a href="#formats">Formats</a><a href="#get">Download</a><a href="#faq">FAQ</a></nav><span class="sp"></span>
+<button class="ic" id="theme" aria-label="Toggle light or dark"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+<a class="btn sm n" href="#get">Download</a></div></header>
+<main id="top" class="w">
+<div class="hero"><p class="eb">Version 2.4 · Windows 10 &amp; 11</p>
+<h1>Press play on anything.<br><span>Instantly.</span></h1>
+<p class="lead">Kinora is a fast, native media player for Windows. Open a video, song or photo and it’s on screen before you blink, in a calm interface that borrows its colour from whatever you’re watching.</p>
+<div class="cta"><a class="btn" data-dl="setup" href="#get">Download for Windows<span class="ai"><svg><use href="#arrow"/></svg></span></a><a class="btn g n" data-dl="zip" href="#get">Get the portable version</a></div>
+<div class="meta" id="meta">Free · 33&nbsp;MB · No ads, accounts or tracking</div>
+<div class="win" id="win"><div class="wtop"><svg><use href="#logo"/></svg>Kinora<span class="s"></span><span class="o"></span></div>
+<div class="wbody"><div class="side"><b></b><b></b><b></b><b></b></div><div class="grid" id="cards"></div></div>
+<div class="bar"><span class="pl"></span><span class="tr2"></span><span style="font-size:12px;color:var(--ink2)">1:12 / 3:08</span></div></div>
+<div class="sw">Try an accent <button class="on" style="--c:#0f0f10" data-c="" aria-label="Ink"></button><button style="--c:#3b6cf4" data-c="#3b6cf4" aria-label="Blue"></button><button style="--c:#8b5cf6" data-c="#8b5cf6" aria-label="Violet"></button><button style="--c:#ec4899" data-c="#ec4899" aria-label="Pink"></button><button style="--c:#f97316" data-c="#f97316" aria-label="Orange"></button><button style="--c:#12a36b" data-c="#12a36b" aria-label="Green"></button></div></div>
+<div class="st rv"><div><b>33 MB</b><span>One installer, nothing extra</span></div><div><b>25+</b><span>Video, audio and image formats</span></div><div><b>0.1–4×</b><span>Playback speed, pitch preserved</span></div><div><b>Zero</b><span>Accounts, ads or trackers</span></div></div>
+<p class="mf rv">No web engine. No ads. No accounts. <span>Just a fast, quiet player that gets out of the way and lets the picture, and the music, take over.</span></p>
+
+<section id="features" class="rv"><div class="sh"><div class="lb"><b>01</b>Features</div><h2>Everything you want from a player. <span>Nothing you don’t.</span></h2></div>
+<div class="tour"><div class="tl" id="tl"></div><div class="tv" id="tv"></div></div></section>
+
+<section id="formats" class="rv"><div class="sh"><div class="lb"><b>02</b>Formats</div><h2>If it has pictures or sound, <span>it plays.</span></h2></div>
+<div class="fm"><div><h4>Video</h4><p><b>MP4</b> · <b>MKV</b> · <b>WebM</b> · <b>AVI</b> · <b>MOV</b> · <b>WMV</b> · <b>FLV</b> · <b>MPEG</b> · <b>TS</b> · <b>3GP</b> · <b>HEVC / H.265</b></p></div><div><h4>Audio</h4><p><b>MP3</b> · <b>FLAC</b> · <b>WAV</b> · <b>OGG</b> · <b>M4A</b> · <b>AAC</b> · <b>OPUS</b> · <b>WMA</b> · <b>AIFF</b></p></div><div><h4>Images</h4><p><b>JPG</b> · <b>PNG</b> · <b>WebP</b> · <b>GIF</b> (animated) · <b>BMP</b> · <b>TIFF</b> · <b>ICO</b></p></div></div></section>
+
+<section id="get" class="rv"><div class="sh"><div class="lb"><b>03</b>Download</div><h2>Free for Windows 10 <span>and 11.</span></h2></div>
+<div class="dl"><div class="d main"><h3>Installer</h3><p>The easiest way to get started. Sets up shortcuts and file associations, and can start quietly with Windows.</p><ul><li>Opens media from Explorer instantly</li><li>Replaces older Rust Media Player installs</li><li>Uninstalls cleanly from Windows Settings</li></ul><a class="btn" data-dl="setup" href="#get">Download Kinora-Setup.exe<span class="ai"><svg><use href="#arrow"/></svg></span></a></div>
+<div class="d"><h3>Portable</h3><p>Unzip anywhere and run. Nothing is installed, and nothing is touched outside the folder except your settings.</p><ul><li>No admin rights needed</li><li>Ideal for a USB drive</li></ul><a class="btn g" data-dl="zip" href="#get">Download the .zip<span class="ai"><svg><use href="#arrow"/></svg></span></a></div></div>
+<p class="req">Requires Windows 10 or 11 (64-bit) and any graphics hardware with OpenGL, including the built-in graphics in ordinary laptops.</p></section>
+
+<section id="faq" class="rv"><div class="sh"><div class="lb"><b>04</b>FAQ</div><h2>Frequently <span>asked questions.</span></h2></div><div class="faq" id="faqs"></div></section>
+</main>
+<footer><div class="w fo"><span>© Kinora. Written in Rust. Playback powered by libmpv (LGPL).</span><nav><a class="lk" href="#features">Features</a><a class="lk" href="#get">Download</a><a class="lk" href="#faq">FAQ</a></nav></div></footer>
+<div id="toast" role="status"></div>
+<script>
+document.documentElement.classList.add("js");
+// Where the files live, e.g. "https://github.com/ibrahimzlitni2/Kinora/releases/latest/download/"
+const BASE="";const FILES={setup:"Kinora-Setup.exe",zip:"Kinora-Portable.zip"};
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],root=document.documentElement;
+const cols=[["#ffb347","#ff6b6b"],["#3b82f6","#8b5cf6"],["#12a36b","#0ea5a5"],["#ec4899","#f97316"],["#6366f1","#3b82f6"],["#f59e0b","#ef4444"],["#0ea5a5","#3b82f6"],["#8b5cf6","#ec4899"]];
+$("#cards").innerHTML=cols.map(c=>`<div class="card"><div class="t" style="--a:${c[0]};--b:${c[1]}"></div><p></p><p></p></div>`).join("");
+/* feature tour */
+const tile=(n)=>`<i style="--n:${n};--a:${cols[n%8][0]};--b:${cols[n%8][1]}"></i>`;
+const V=[
+`<div class="v1"><div class="f1"></div><div class="b1"><i></i><i></i></div></div>`,
+`<div class="eq">${Array.from({length:26},(_,i)=>`<b style="--d:${(.55+((i*37)%10)/12).toFixed(2)}s;--l:-${((i*53)%10)/10}s"></b>`).join("")}</div>`,
+`<div class="tg3">${Array.from({length:9},(_,i)=>tile(i)).join("")}</div>`,
+`<div class="v4"><div class="w4"><i></i><i></i><i></i><i></i></div><div class="tb"><i></i><i></i><i class="k"></i><i></i></div></div>`,
+`<div class="sl"><div style="--l:0s"><label>Speed <em>0.1× – 4×</em></label></div><div style="--l:-1.3s"><label>Pitch <em>±12 semitones</em></label></div></div>`,
+`<div class="pv"><span style="--n:0">No accounts</span><span style="--n:1">No telemetry</span><span style="--n:2">Works offline</span><span style="--n:3">Stays on your PC</span></div>`];
+const F=[["A UI that matches the moment","Kinora samples the colours on screen, whether it’s a film frame, a photo or an album cover, and gently tints buttons, sliders and highlights to match. It’s optional, and it’s lovely."],
+["Music you can see","Pick from five visualisers that follow the real spectrum of each song. They stay locked to the audio, even when you skip around or change the speed."],
+["Your whole library at a glance","Open a folder and browse it as a grid or a list with real thumbnails: video frames, album art and photos. Sort by name, size, type or date."],
+["Ready before you are","Kinora can wait quietly in the tray, so double-clicking a file in Explorer opens it instantly instead of starting an app from scratch."],
+["Control that goes deeper","Speed from 0.1× to 4×. Pitch shifting in semitones. Precise seeking, resume where you left off, and keyboard shortcuts for everything."],
+["Private, offline, yours","No accounts and no telemetry. Settings, history and thumbnails all stay on your PC, and you can wipe them whenever you like."]];
+$("#tl").innerHTML=F.map((f,i)=>`<button class="tr" aria-label="${f[0]}"><h3><small>0${i+1}</small>${f[0]}</h3><div class="dd"><div><p>${f[1]}</p></div></div></button>`).join("");
+$("#tv").innerHTML=V.map(v=>`<div class="vz">${v}</div>`).join("");
+const rows=$$(".tr"),vs=$$(".vz");let cur=0;
+const go=i=>{cur=i;rows.forEach((r,k)=>r.classList.toggle("on",k===i));vs.forEach((v,k)=>v.classList.toggle("on",k===i))};
+rows.forEach((r,i)=>{r.onclick=()=>{if(i!==cur)go(i)};r.addEventListener("animationend",e=>{if(e.animationName==="pg")go((cur+1)%rows.length)})});go(0);
+/* faq */
+const Q=[["Is Kinora free?","Yes, completely. There are no ads, no subscriptions, no accounts and no analytics."],
+["Can it replace Windows Media Player?","Yes. Choose Kinora as the default app for videos, music or photos, either during setup or later under Windows Settings → Apps → Default apps. It also plays formats Windows Media Player struggles with, such as MKV, HEVC and FLAC."],
+["What does “keep running in the background” do?","It lets Kinora wait in the system tray after you close its window, so the next file opens instantly. Switch it off under Settings → Window &amp; background, or choose Quit from the tray menu."],
+["Does Kinora collect or upload anything?","No. It never sends anything anywhere. Settings, resume points and thumbnails are stored on your PC, and you can clear them from Settings at any time."],
+["Will it run on my PC?","Kinora needs Windows 10 or 11 (64-bit) and any graphics hardware with OpenGL, including the integrated graphics in everyday laptops. Hardware video decoding is used when it’s available."],
+["Can I delete files from inside Kinora?","Yes. Use the trash button or press Delete. Kinora asks first, then moves the file to the Recycle Bin, so nothing is gone for good."],
+["How do I uninstall it?","Open Windows Settings → Apps, find Kinora and choose Uninstall. A portable copy can simply be deleted."]];
+$("#faqs").innerHTML=Q.map((q,i)=>`<div class="q"><button aria-expanded="false" aria-controls="a${i}">${q[0]}<span class="pm"></span></button><div class="a" id="a${i}"><div><p>${q[1]}</p></div></div></div>`).join("");
+$$(".q button").forEach(b=>b.onclick=()=>{const q=b.parentElement,o=!q.classList.contains("open");q.classList.toggle("open",o);b.setAttribute("aria-expanded",o)});
+/* hero accent demo, buttons, downloads */
+$$(".sw button").forEach(b=>b.onclick=()=>{const w=$("#win");b.dataset.c?w.style.setProperty("--acc",b.dataset.c):w.style.removeProperty("--acc");$$(".sw button").forEach(x=>x.classList.toggle("on",x===b))});
+$$(".btn,.d").forEach(el=>el.addEventListener("pointermove",e=>{const r=el.getBoundingClientRect();el.style.setProperty("--x",e.clientX-r.left+"px");el.style.setProperty("--y",e.clientY-r.top+"px")}));
+const T=$("#toast");let tt;const toast=m=>{T.textContent=m;T.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>T.classList.remove("on"),3600)};
+$$("[data-dl]").forEach(a=>{a.href=BASE?BASE+FILES[a.dataset.dl]:"#get";a.onclick=e=>{if(!BASE){e.preventDefault();toast("Downloads aren’t linked yet. Set BASE in the page source to your file address.")}}});
+if(!/Windows/i.test(navigator.userAgent))$("#meta").textContent="Kinora is built for Windows 10 and 11 (64-bit). Download it from a Windows PC.";
+$("#theme").onclick=()=>{const d=(root.dataset.theme||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"))==="dark";root.dataset.theme=d?"light":"dark";document.body.classList.toggle("dk",!d);try{localStorage.setItem("k-theme",root.dataset.theme)}catch(e){}};
+try{const s=localStorage.getItem("k-theme");if(s){root.dataset.theme=s;document.body.classList.toggle("dk",s==="dark")}}catch(e){}
+if(!root.dataset.theme&&matchMedia("(prefers-color-scheme: dark)").matches)document.body.classList.add("dk");
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.08});
+$$(".rv").forEach(el=>io.observe(el));
+</script></body></html>
